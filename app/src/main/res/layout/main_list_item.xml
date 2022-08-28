@@ -13,7 +13,7 @@
         android:layout_height="195dp"
         android:layout_margin="8dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="10dp">
+        app:cardElevation="15dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -64,7 +64,6 @@
                 tools:text="Doctor Strange, with the help of mystical allies both old and new, traverses the mind-bending and dangerous alternate realities of the Multiverse to confront a mysterious new adversary." />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     </com.google.android.material.card.MaterialCardView>

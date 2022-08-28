@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TMDB_Alkemy</string>
     <string name="movie_poster">Movie poster</string>
+    <string name="status_image">Status image</string>
 </resources>
