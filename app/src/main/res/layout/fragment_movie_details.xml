@@ -44,13 +44,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:textAppearance="@style/Widget.MovieDetails.Tagline.Textview"
         app:layout_constraintEnd_toEndOf="@+id/details_title"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/details_title"
-        app:layout_constraintTop_toBottomOf="@+id/details_year"
+        app:layout_constraintTop_toBottomOf="@+id/details_user_score"
         tools:text="Enter a new dimension of Strange." />
 
     <TextView
@@ -58,29 +58,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textAppearance="@style/Widget.MovieDetails.Date.Textview"
+        android:textAppearance="@style/Widget.MovieDetails.Genres.Textview"
         app:layout_constraintEnd_toEndOf="@+id/details_title"
         app:layout_constraintStart_toStartOf="@+id/details_title"
         app:layout_constraintTop_toBottomOf="@+id/details_title"
-        tools:text="June 29, 2022" />
+        tools:text="Fantasy, Action, Adventure" />
 
     <TextView
         android:id="@+id/details_user_score"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="@string/user_score"
         app:layout_constraintStart_toStartOf="@+id/details_title"
-        tools:layout_editor_absoluteY="157dp" />
+        app:layout_constraintTop_toBottomOf="@+id/details_year" />
 
     <View
         android:id="@+id/divider"
         style="@style/Widget.MovieDetails.Divider"
         android:layout_width="1dp"
         android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="@id/details_title"
-        app:layout_constraintStart_toStartOf="@id/details_title"
-        app:layout_constraintTop_toTopOf="@id/details_user_score"
-        app:layout_constraintBottom_toBottomOf="@id/details_user_score"/>
+        app:layout_constraintBottom_toBottomOf="@id/details_user_score"
+        app:layout_constraintEnd_toStartOf="@+id/details_mixed_data"
+        app:layout_constraintStart_toEndOf="@+id/details_user_score"
+        app:layout_constraintTop_toTopOf="@id/details_user_score" />
 
 
     <TextView
@@ -89,9 +90,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/Widget.MovieDetails.MixedData.Textview"
         app:layout_constraintEnd_toEndOf="@+id/details_title"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/materialCardView"
-        tools:layout_editor_absoluteY="200dp"
+        app:layout_constraintTop_toTopOf="@+id/details_user_score"
         tools:text="@string/mixed_data" />
 
     <TextView
