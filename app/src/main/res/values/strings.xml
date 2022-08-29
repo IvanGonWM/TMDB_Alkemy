@@ -2,4 +2,7 @@
     <string name="app_name">TMDB_Alkemy</string>
     <string name="movie_poster">Movie poster</string>
     <string name="status_image">Status image</string>
+    <string name="overview">Overview</string>
+    <string name="mixed_data">05/06/2022 - EN \n Fantasy, Action, Adventure</string>
+    <string name="user_score">User score:\n%s/10</string>
 </resources>

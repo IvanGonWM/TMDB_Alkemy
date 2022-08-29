@@ -26,7 +26,7 @@
                 android:contentDescription="@string/movie_poster"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:src="@drawable/drstrange_example"/>
+                tools:src="@drawable/drstrange_example" />
 
             <TextView
                 android:id="@+id/card_title"

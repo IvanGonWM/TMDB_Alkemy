@@ -11,4 +11,33 @@
     <style name="Widget.MainListItem.Description.Textview" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">13.5sp</item>
     </style>
+
+    <!-- Movie details style -->
+    <style name="Widget.MovieDetails.Title.Textview" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+    <style name="Widget.MovieDetails.Date.Textview" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+    <style name="Widget.MovieDetails.Tagline.Textview" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+    <style name="Widget.MovieDetails.MixedData.Textview" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="Widget.MovieDetails.OverviewTitle.Textview" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Widget.MovieDetails.OverviewParagraph.Textview" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Widget.MovieDetails.Divider" parent="">
+        <item name="android:background">?attr/dividerVertical</item>
+    </style>
 </resources>
