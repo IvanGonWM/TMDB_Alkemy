@@ -91,7 +91,8 @@
         android:textAppearance="@style/Widget.MovieDetails.MixedData.Textview"
         app:layout_constraintEnd_toEndOf="@+id/details_title"
         app:layout_constraintTop_toTopOf="@+id/details_user_score"
-        tools:text="@string/mixed_data" />
+        android:text="@string/mixed_data"
+        tools:text="15/06/2022 \n EN"/>
 
     <TextView
         android:id="@+id/details_overview_title"

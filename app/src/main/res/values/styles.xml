@@ -30,12 +30,12 @@
         <item name="android:textSize">15sp</item>
     </style>
     <style name="Widget.MovieDetails.OverviewTitle.Textview" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
+
     </style>
     <style name="Widget.MovieDetails.OverviewParagraph.Textview" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
     </style>
     <style name="Widget.MovieDetails.Divider" parent="">
         <item name="android:background">?attr/dividerVertical</item>
