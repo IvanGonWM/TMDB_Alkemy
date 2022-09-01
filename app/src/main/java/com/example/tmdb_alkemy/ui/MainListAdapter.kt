@@ -1,6 +1,8 @@
 package com.example.tmdb_alkemy.ui
 
-class MainListAdapter(private val clickListener: MovieListener){
+import androidx.recyclerview.widget.ListAdapter
+
+class MainListAdapter() : ListAdapter<>{
 
 }
 
