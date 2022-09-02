@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tmdb_alkemy.R
+import com.example.tmdb_alkemy.databinding.FragmentMainListBinding
+import com.example.tmdb_alkemy.databinding.MainListItemBinding
 
 class MainListFragment: Fragment() {
 
@@ -18,14 +20,13 @@ class MainListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentAmphibianListBinding.inflate(inflater)
-        // TODO: call the view model method that calls the amphibians api
+        val binding = FragmentMainListBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.recyclerView.adapter = MainListAdapter(AmphibianListener { amphibian ->
-            viewModel.onAmphibianClicked(amphibian)
+        binding.mainRecyclerView.adapter = MainListAdapter(MovieListener { movie ->
+            viewModel.onMovieClicked(movie)
             findNavController()
-                .navigate(R.id)
+                .navigate(R.id.action_mainListFragment_to_movieDetailsFragment)
         })
 
         // Inflate the layout for this fragment

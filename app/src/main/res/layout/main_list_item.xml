@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="clickListener"
+            type="com.example.tmdb_alkemy.ui.MovieListener" />
+        <variable
+            name="movie"
+            type="com.example.tmdb_alkemy.model.MovieListItem" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -12,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="195dp"
         android:layout_margin="8dp"
+        android:onClick="@{() -> clickListener.onClick(movie)}"
         app:cardCornerRadius="10dp"
         app:cardElevation="15dp">
 
