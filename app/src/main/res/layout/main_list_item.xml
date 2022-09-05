@@ -30,6 +30,7 @@
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/movie_poster"
+                app:listItemPosterUrl="@{movie.posterPath}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:src="@drawable/drstrange_example" />

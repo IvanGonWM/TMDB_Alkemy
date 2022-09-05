@@ -12,9 +12,8 @@ import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.themoviedb.org/"
 private const val API_KEY = "895dc3f394a1ac9177a5cfef55daf32d"
-//Mini poster base url: https://www.themoviedb.org/t/p/w220_and_h330_face
-//Big poster base url: https://www.themoviedb.org/t/p/w300_and_h450_bestv2
 
+enum class tmdbApiStatus { LOADING, ERROR, DONE }
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
