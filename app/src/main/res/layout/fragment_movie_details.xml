@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.example.tmdb_alkemy.ui.MainViewModel" />
+        <variable
+            name="movieDetails"
+            type="com.example.tmdb_alkemy.model.MovieDetails" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +24,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:cardCornerRadius="10dp"
+            app:detailsPosterUrl="@{movieDetails.posterPath}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -42,6 +46,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
+            android:text="@{movieDetails.title}"
             android:textAppearance="@style/Widget.MovieDetails.Title.Textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/materialCardView"
@@ -54,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="40dp"
+            android:text="@{movieDetails.tagline}"
             android:layout_marginEnd="8dp"
             android:textAppearance="@style/Widget.MovieDetails.Tagline.Textview"
             app:layout_constraintEnd_toEndOf="@+id/details_title"
@@ -120,6 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:text="@{movieDetails.description}"
             android:textAppearance="@style/Widget.MovieDetails.OverviewParagraph.Textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/details_overview_title"
