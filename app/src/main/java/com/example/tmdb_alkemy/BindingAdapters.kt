@@ -7,8 +7,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.tmdb_alkemy.model.MovieListItem
-import com.example.tmdb_alkemy.network.tmdbApiStatus
 import com.example.tmdb_alkemy.ui.MainListAdapter
+import com.example.tmdb_alkemy.ui.TmdbApiStatus
 
 private const val LIST_ITEM_POSTER_URL = "https://www.themoviedb.org/t/p/w220_and_h330_face"
 private const val DETAILS_POSTER_URL = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2"
@@ -46,17 +46,17 @@ fun bindRecyclerView(
 
 @BindingAdapter("tmdbApiStatus")
 fun bindStatus(statusImageView: ImageView,
-               status: tmdbApiStatus?) {
+               status: TmdbApiStatus?) {
     when (status) {
-        tmdbApiStatus.LOADING -> {
+        TmdbApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.loading_animation)
         }
-        tmdbApiStatus.ERROR -> {
+        TmdbApiStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
         }
-        tmdbApiStatus.DONE -> {
+        TmdbApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
         else -> {return}

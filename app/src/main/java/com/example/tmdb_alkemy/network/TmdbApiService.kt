@@ -13,8 +13,6 @@ import retrofit2.http.Query
 private const val BASE_URL = "https://api.themoviedb.org/"
 private const val API_KEY = "895dc3f394a1ac9177a5cfef55daf32d"
 
-enum class tmdbApiStatus { LOADING, ERROR, DONE }
-
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
@@ -25,7 +23,6 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface MoviesApiService {
-
     @GET("https://api.themoviedb.org/3/movie/popular?api_key=$API_KEY&language=en-US&")
     suspend fun getPopularMovies(@Query("page") page: Int = 1): MovieList
 
@@ -34,7 +31,7 @@ interface MoviesApiService {
 }
 
 object MoviesDatabaseApi {
-    val retrofitService : MoviesApiService by lazy {
+    val retrofitService: MoviesApiService by lazy {
         retrofit.create(MoviesApiService::class.java)
     }
 }
