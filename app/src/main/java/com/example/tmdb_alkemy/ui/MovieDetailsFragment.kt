@@ -10,7 +10,7 @@ import com.example.tmdb_alkemy.databinding.FragmentMovieDetailsBinding
 
 class MovieDetailsFragment: Fragment() {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MovieDetailsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

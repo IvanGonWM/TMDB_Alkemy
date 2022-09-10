@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 enum class TmdbApiStatus { LOADING, ERROR, DONE }
 
-class MainViewModel : ViewModel()  {
+class MainListViewModel : ViewModel()  {
 
     private val _status = MutableLiveData<TmdbApiStatus>()
     val status: LiveData<TmdbApiStatus> = _status

@@ -13,7 +13,7 @@ import com.example.tmdb_alkemy.databinding.MainListItemBinding
 
 class MainListFragment: Fragment() {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.tmdb_alkemy.ui.MainViewModel" />
+            type="com.example.tmdb_alkemy.ui.MovieDetailsViewModel" />
         <variable
             name="movieDetails"
             type="com.example.tmdb_alkemy.model.MovieDetails" />
