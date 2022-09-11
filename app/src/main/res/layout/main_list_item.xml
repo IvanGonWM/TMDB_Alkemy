@@ -6,7 +6,7 @@
     <data>
         <variable
             name="clickListener"
-            type="com.example.tmdb_alkemy.ui.MovieListener" />
+            type="com.example.tmdb_alkemy.ui.main_list.MovieListener" />
         <variable
             name="movie"
             type="com.example.tmdb_alkemy.model.MovieListItem" />

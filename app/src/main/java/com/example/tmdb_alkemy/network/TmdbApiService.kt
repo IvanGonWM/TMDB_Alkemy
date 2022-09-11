@@ -24,7 +24,7 @@ private val retrofit = Retrofit.Builder()
 
 interface MoviesApiService {
     @GET("https://api.themoviedb.org/3/movie/popular?api_key=$API_KEY&language=en-US&")
-    suspend fun getPopularMovies(@Query("page") page: Int = 1): MovieList
+    suspend fun getPagedMovieList(@Query("page") page: Int = 1): MovieList
 
     @GET("3/movie/{id}?api_key=${API_KEY}&language=en-US")
     suspend fun getMovieDetails(@Path("id") id: Int): MovieDetails

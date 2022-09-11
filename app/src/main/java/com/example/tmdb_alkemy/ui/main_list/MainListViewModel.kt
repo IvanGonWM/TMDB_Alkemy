@@ -1,12 +1,11 @@
-package com.example.tmdb_alkemy.ui
+package com.example.tmdb_alkemy.ui.main_list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tmdb_alkemy.model.MovieList
 import com.example.tmdb_alkemy.model.MovieListItem
-import com.example.tmdb_alkemy.network.MoviesDatabaseApi
+import com.example.tmdb_alkemy.network.FacadeRepository
 import kotlinx.coroutines.launch
 
 enum class TmdbApiStatus { LOADING, ERROR, DONE }
@@ -16,11 +15,11 @@ class MainListViewModel : ViewModel()  {
     private val _status = MutableLiveData<TmdbApiStatus>()
     val status: LiveData<TmdbApiStatus> = _status
 
-    private val _popularMovies = MutableLiveData<MovieList>()
-    val popularMovies: LiveData<MovieList> = _popularMovies
+    private val _movieList = MutableLiveData<List<MovieListItem>>()
+    val movieList: LiveData<List<MovieListItem>> = _movieList
 
-    private val _selectedCard = MutableLiveData<MovieListItem>()
-    val selectedCard : LiveData<MovieListItem> = _selectedCard
+    var isLastPage: Boolean = false
+    var isSearching: Boolean = false
 
     init {
         getPopularMovies()
@@ -31,7 +30,7 @@ class MainListViewModel : ViewModel()  {
         viewModelScope.launch {
             _status.value = TmdbApiStatus.LOADING
             try {
-                _popularMovies.value = MoviesDatabaseApi.retrofitService.getPopularMovies()
+                _movieList.value = FacadeRepository.getLoadedMoviesList()
                 _status.value = TmdbApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = TmdbApiStatus.ERROR
@@ -39,7 +38,12 @@ class MainListViewModel : ViewModel()  {
         }
     }
 
-    fun onMovieClicked(movie: MovieListItem) {
-        _selectedCard.value = movie
-    }
+    fun getNextPopularMovies(): Boolean {return true}
+
+
+    fun refreshMovies() {
+        viewModelScope.launch() {
+        FacadeRepository.refreshMovies()
+        _movieList.value = FacadeRepository.getLoadedMoviesList()
+    }}
 }

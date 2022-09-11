@@ -7,8 +7,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.tmdb_alkemy.model.MovieListItem
-import com.example.tmdb_alkemy.ui.MainListAdapter
-import com.example.tmdb_alkemy.ui.TmdbApiStatus
+import com.example.tmdb_alkemy.ui.main_list.MainListAdapter
+import com.example.tmdb_alkemy.ui.main_list.TmdbApiStatus
 
 private const val LIST_ITEM_POSTER_URL = "https://www.themoviedb.org/t/p/w220_and_h330_face"
 private const val DETAILS_POSTER_URL = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2"

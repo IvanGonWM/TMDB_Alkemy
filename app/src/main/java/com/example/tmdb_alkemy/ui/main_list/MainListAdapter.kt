@@ -1,4 +1,4 @@
-package com.example.tmdb_alkemy.ui
+package com.example.tmdb_alkemy.ui.main_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tmdb_alkemy.databinding.MainListItemBinding
 import com.example.tmdb_alkemy.model.MovieListItem
 
-class MainListAdapter(private val clickListener: MovieListener) : ListAdapter<MovieListItem, MainListAdapter.MovieViewHolder>(DiffCallback) {
+class MainListAdapter : ListAdapter<MovieListItem, MainListAdapter.MovieViewHolder>
+    (DiffCallback) {
 
     class MovieViewHolder(
         private var binding: MainListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(clickListener: MovieListener, movie: MovieListItem) {
-            binding.clickListener = clickListener
+
+        fun bind(movie: MovieListItem) {
             binding.movie = movie
             binding.executePendingBindings()
         }
@@ -26,10 +27,9 @@ class MainListAdapter(private val clickListener: MovieListener) : ListAdapter<Mo
         }
 
         override fun areContentsTheSame(oldItem: MovieListItem, newItem: MovieListItem): Boolean {
-            return oldItem.title  == newItem.title
+            return oldItem.title == newItem.title
         }
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -40,7 +40,7 @@ class MainListAdapter(private val clickListener: MovieListener) : ListAdapter<Mo
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
-        holder.bind(clickListener, movie)
+        holder.bind(movie)
     }
 
 }

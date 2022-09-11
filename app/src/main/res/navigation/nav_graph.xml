@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainListFragment"
-        android:name="com.example.tmdb_alkemy.ui.MainListFragment"
+        android:name="com.example.tmdb_alkemy.ui.main_list.MainListFragment"
         android:label="Main List"
         tools:layout="@layout/fragment_main_list">
         <action
@@ -16,10 +16,11 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.example.tmdb_alkemy.ui.MovieDetailsFragment"
+        android:name="com.example.tmdb_alkemy.ui.movie_details.MovieDetailsFragment"
         android:label="Movie Details"
-        tools:layout="@layout/fragment_movie_details"/>
+        tools:layout="@layout/fragment_movie_details">
     <argument
         android:name="movieId"
         app:argType="integer" />
+    </fragment>
 </navigation>
