@@ -81,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textAppearance="@style/Widget.MovieDetails.Genres.Textview"
+                app:genreSubtitle="@{movieDetails.genres}"
                 app:layout_constraintEnd_toEndOf="@+id/details_title"
                 app:layout_constraintStart_toStartOf="@+id/details_title"
                 app:layout_constraintTop_toBottomOf="@+id/details_title"
@@ -88,12 +89,16 @@
 
             <TextView
                 android:id="@+id/details_user_score"
+                style="@style/Widget.MovieDetails.ExtraData.Textview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
-                android:text="@string/user_score"
+                android:textAppearance="@style/Widget.MovieDetails.ExtraData.Textview"
+                app:formatUserScore="@{movieDetails.voteAverage}"
                 app:layout_constraintStart_toStartOf="@+id/details_title"
-                app:layout_constraintTop_toBottomOf="@+id/details_year" />
+                app:layout_constraintTop_toBottomOf="@+id/details_year"
+                tools:text="User score:\n 7.6/10" />
 
             <View
                 android:id="@+id/divider"
@@ -108,13 +113,15 @@
 
             <TextView
                 android:id="@+id/details_mixed_data"
+                style="@style/Widget.MovieDetails.ExtraData.Textview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/mixed_data"
-                android:textAppearance="@style/Widget.MovieDetails.MixedData.Textview"
+                android:layout_marginEnd="8dp"
+                android:textAppearance="@style/Widget.MovieDetails.ExtraData.Textview"
                 app:layout_constraintEnd_toEndOf="@+id/details_title"
                 app:layout_constraintTop_toTopOf="@+id/details_user_score"
-                tools:text="15/06/2022 \n EN" />
+                app:mixedData="@{movieDetails}"
+                tools:text="15-06-2022 \n EN" />
 
             <TextView
                 android:id="@+id/details_overview_title"

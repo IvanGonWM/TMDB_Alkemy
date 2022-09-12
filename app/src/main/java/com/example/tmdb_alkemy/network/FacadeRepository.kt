@@ -10,7 +10,7 @@ object FacadeRepository {
 
     private var currentPage: Int = 1
     private var totalPages: Int = 1
-    private var totalMovies:  Int = 0
+    private var totalMovies: Int = 0
     private var loading: Boolean = false
 
     suspend fun getNextPage() {
@@ -33,8 +33,12 @@ object FacadeRepository {
         return loadedMovieList
     }
 
+    fun isLastPage(): Boolean {
+        return currentPage == totalPages
+    }
+
     suspend fun getOpenedMovieDetails(id: Int): MovieDetails {
-        val alreadyExists = openedMovieList.firstOrNull{ movie -> movie.id == id }
+        val alreadyExists = openedMovieList.firstOrNull { movie -> movie.id == id }
         if (alreadyExists != null) return alreadyExists
 
         val searchedMovieDetails = MoviesDatabaseApi.retrofitService.getMovieDetails(id = id)

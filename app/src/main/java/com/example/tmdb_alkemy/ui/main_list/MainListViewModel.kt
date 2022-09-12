@@ -30,6 +30,7 @@ class MainListViewModel : ViewModel()  {
         viewModelScope.launch {
             _status.value = TmdbApiStatus.LOADING
             try {
+                FacadeRepository.getNextPage()
                 _movieList.value = FacadeRepository.getLoadedMoviesList()
                 _status.value = TmdbApiStatus.DONE
             } catch (e: Exception) {
@@ -38,7 +39,21 @@ class MainListViewModel : ViewModel()  {
         }
     }
 
-    fun getNextPopularMovies(): Boolean {return true}
+    fun getNextPopularMovies(): Boolean {
+        if (isSearching) return false
+        viewModelScope.launch {
+            try {
+                FacadeRepository.getNextPage()
+                _movieList.value = FacadeRepository.getLoadedMoviesList()
+                isLastPage = FacadeRepository.isLastPage()
+            }
+            catch (e: Exception)
+            {
+                throw e
+            }
+        }
+        return true
+    }
 
 
     fun refreshMovies() {

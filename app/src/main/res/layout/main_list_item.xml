@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="clickListener"
-            type="com.example.tmdb_alkemy.ui.main_list.MovieListener" />
+
         <variable
             name="movie"
             type="com.example.tmdb_alkemy.model.MovieListItem" />
@@ -17,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="195dp"
         android:layout_margin="8dp"
-        android:onClick="@{() -> clickListener.onClick(movie)}"
         app:cardCornerRadius="10dp"
         app:cardElevation="15dp">
 
@@ -30,9 +27,9 @@
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/movie_poster"
-                app:listItemPosterUrl="@{movie.posterPath}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:listItemPosterUrl="@{movie.posterPath}"
                 tools:src="@drawable/drstrange_example" />
 
             <TextView
@@ -42,11 +39,11 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
+                android:text="@{movie.title}"
                 android:textAppearance="@style/Widget.MainListItem.Title.Textview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/card_poster"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="@{movie.title}"
                 tools:text="Doctor Strange in the Multiverse of Madness" />
 
             <TextView
@@ -54,8 +51,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{movie.releaseDate}"
                 android:textAppearance="@style/Widget.MainListItem.Date.Textview"
+                app:formatMovieDate="@{movie.releaseDate}"
                 app:layout_constraintStart_toStartOf="@+id/card_title"
                 app:layout_constraintTop_toBottomOf="@+id/card_title"
                 tools:text="June 29, 2022" />
