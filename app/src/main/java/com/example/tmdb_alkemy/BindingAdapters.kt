@@ -22,8 +22,8 @@ import java.time.format.DateTimeFormatter
 private const val LIST_ITEM_POSTER_URL = "https://www.themoviedb.org/t/p/w220_and_h330_face"
 private const val DETAILS_POSTER_URL = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2"
 
-@BindingAdapter("listItemPosterUrl")
-fun bindListImage(
+@BindingAdapter("posterUrl")
+fun bindImage(
     imageView: ImageView,
     imageUrl: String?
 ) {
@@ -107,8 +107,10 @@ fun bindUserScore(
     scoreTextView: TextView,
     score: Double?,
 ) {
-    scoreTextView.text = Resources.getSystem()
-        .getString(R.string.user_score, score)
+    scoreTextView.text = ""
+
+        /*Resources.getSystem()
+        .getString(R.string.user_score, score)*/
 }
 
 @BindingAdapter("genreSubtitle")
@@ -116,7 +118,8 @@ fun bindGenreSubtitle(
     genreTextView: TextView,
     genres: List<Genre>?
 ) {
-    genreTextView.text = genres?.joinToString { it.name }
+    genreTextView.text = ""
+        //genres?.joinToString { it.name }
 }
 
 @BindingAdapter("mixedData")
@@ -124,10 +127,11 @@ fun bindMixedData(
     mixedDataTextView: TextView,
     movieDetailsItem: MovieDetails?
 ) {
-    mixedDataTextView.text = Resources.getSystem()
+    mixedDataTextView.text = ""
+        /*Resources.getSystem()
         .getString(
             R.string.mixed_data,
             movieDetailsItem?.releaseDate,
             movieDetailsItem?.originalLanguage
-        )
+        )*/
 }

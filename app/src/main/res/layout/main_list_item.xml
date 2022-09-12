@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="movie"
             type="com.example.tmdb_alkemy.model.MovieListItem" />
@@ -29,7 +28,7 @@
                 android:contentDescription="@string/movie_poster"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:listItemPosterUrl="@{movie.posterPath}"
+                app:posterUrl="@{movie.posterPath}"
                 tools:src="@drawable/drstrange_example" />
 
             <TextView

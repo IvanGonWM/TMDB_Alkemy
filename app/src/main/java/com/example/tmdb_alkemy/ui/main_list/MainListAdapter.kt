@@ -2,6 +2,7 @@ package com.example.tmdb_alkemy.ui.main_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,12 @@ class MainListAdapter : ListAdapter<MovieListItem, MainListAdapter.MovieViewHold
 
         fun bind(movie: MovieListItem) {
             binding.movie = movie
+            binding.itemCard.setOnClickListener {
+                this.itemView.findNavController().navigate(
+                    MainListFragmentDirections
+                        .actionMainListFragmentToMovieDetailsFragment(movieId = movie.id)
+                )
+            }
             binding.executePendingBindings()
         }
     }
@@ -43,8 +50,4 @@ class MainListAdapter : ListAdapter<MovieListItem, MainListAdapter.MovieViewHold
         holder.bind(movie)
     }
 
-}
-
-class MovieListener(val clickListener: (movie: MovieListItem) -> Unit) {
-    fun onClick(movie: MovieListItem) = clickListener(movie)
 }
