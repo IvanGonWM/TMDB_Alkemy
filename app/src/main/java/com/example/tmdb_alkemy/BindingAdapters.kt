@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.tmdb_alkemy.model.Genre
@@ -29,20 +30,6 @@ fun bindImage(
 ) {
     imageUrl?.let {
         val imageUri = (LIST_ITEM_POSTER_URL + imageUrl).toUri().buildUpon().scheme("https").build()
-        imageView.load(imageUri) {
-            placeholder(R.drawable.loading_animation)
-            error(R.drawable.ic_broken_image)
-        }
-    }
-}
-
-@BindingAdapter("detailsPosterUrl")
-fun bindDetailsImage(
-    imageView: ImageView,
-    imageUrl: String?
-) {
-    imageUrl?.let {
-        val imageUri = (DETAILS_POSTER_URL + imageUrl).toUri().buildUpon().scheme("https").build()
         imageView.load(imageUri) {
             placeholder(R.drawable.loading_animation)
             error(R.drawable.ic_broken_image)
@@ -88,50 +75,113 @@ fun bindMovieDate(
     dateTextView: TextView,
     unformattedDate: String?
 ) {
+    dateTextView.text = ""
+    /*
     val format = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     val date = LocalDate.parse(unformattedDate, format)
 
     Log.d("day", date.dayOfMonth.toString() )
     Log.d("month", date.month.toString().lowercase().replaceFirstChar { it.uppercaseChar() } )
     Log.d("year", date.year.toString() )
-    dateTextView.text = ""
-        /*Resources.getSystem()
-        .getString(R.string.formatted_date,
-            date.month.toString().lowercase().replaceFirstChar { it.uppercaseChar() },
-            date.dayOfMonth.toString(),
-            date.year.toString())*/
+    dateTextView.text = "ola"
+    /*Resources.getSystem()
+    .getString(R.string.formatted_date,
+        date.month.toString().lowercase().replaceFirstChar { it.uppercaseChar() },
+        date.dayOfMonth.toString(),
+        date.year.toString())*/*/
 }
 
-@BindingAdapter("formatUserScore")
-fun bindUserScore(
-    scoreTextView: TextView,
-    score: Double?,
+/**dastards**/
+
+
+@BindingAdapter("setDetailsImage")
+fun bindDetailsImage(
+    imageView: ImageView,
+    movie: LiveData<MovieDetails>?
 ) {
-    scoreTextView.text = ""
-
-        /*Resources.getSystem()
-        .getString(R.string.user_score, score)*/
+    if (movie?.value?.posterPath != null) {
+        movie.value!!.posterPath.let {
+            val imageUri =
+                (DETAILS_POSTER_URL + movie.value!!.posterPath).toUri().buildUpon().scheme("https")
+                    .build()
+            imageView.load(imageUri) {
+                placeholder(R.drawable.loading_animation)
+                error(R.drawable.ic_broken_image)
+            }
+        }
+    }
 }
 
-@BindingAdapter("genreSubtitle")
+
+@BindingAdapter("setMovieTitle")
+fun bindTitle(
+    textView: TextView,
+    movie: LiveData<MovieDetails>?
+) {
+    if (movie?.value?.title != null)
+        textView.text = movie.value!!.title
+}
+
+
+@BindingAdapter("setGenreSubtitle")
 fun bindGenreSubtitle(
     genreTextView: TextView,
-    genres: List<Genre>?
+    movie: LiveData<MovieDetails>?
 ) {
-    genreTextView.text = ""
-        //genres?.joinToString { it.name }
+    if (movie?.value?.voteAverage != null) {
+        genreTextView.text = movie.value!!.genres.joinToString { it.name }
+    }
 }
 
-@BindingAdapter("mixedData")
+
+@BindingAdapter("setUserScore")
+fun bindUserScore(
+    scoreTextView: TextView,
+    movie: LiveData<MovieDetails>?
+) {
+    if (movie?.value?.voteAverage != null) {
+        scoreTextView.text = "User score:\n ${movie.value!!.voteAverage}/10"
+            //Resources.getSystem()
+            //.getString(R.string.user_score, movie.value!!.voteAverage)
+    }
+}
+
+
+@BindingAdapter("setMixedData")
 fun bindMixedData(
     mixedDataTextView: TextView,
-    movieDetailsItem: MovieDetails?
+    movie: LiveData<MovieDetails>?
 ) {
-    mixedDataTextView.text = ""
-        /*Resources.getSystem()
-        .getString(
-            R.string.mixed_data,
-            movieDetailsItem?.releaseDate,
-            movieDetailsItem?.originalLanguage
-        )*/
+    if (movie?.value?.releaseDate != null
+        && movie.value?.originalLanguage != null
+    ) {
+        mixedDataTextView.text = "${movie.value!!.releaseDate} \n ${movie.value!!.originalLanguage}"
+
+            /*Resources.getSystem()
+            .getString(
+                R.string.mixed_data,
+                movie.value!!.releaseDate,
+                movie.value!!.originalLanguage
+            )*/
+    }
+}
+
+@BindingAdapter("setTagline")
+fun bindTagline(
+    taglineTextView: TextView,
+    movie: LiveData<MovieDetails>?
+) {
+    if (movie?.value?.tagline != null) {
+        taglineTextView.text = movie.value!!.tagline
+    }
+}
+
+@BindingAdapter("setOverview")
+fun bindOverview(
+    overviewTextView: TextView,
+    movie: LiveData<MovieDetails>?
+) {
+    if (movie?.value?.description != null) {
+        overviewTextView.text = movie.value!!.description
+    }
 }

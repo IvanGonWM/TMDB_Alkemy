@@ -8,10 +8,6 @@
         <variable
             name="viewModel"
             type="com.example.tmdb_alkemy.ui.movie_details.MovieDetailsViewModel" />
-
-        <variable
-            name="movieDetails"
-            type="com.example.tmdb_alkemy.model.MovieDetails" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -38,11 +34,11 @@
                     android:id="@+id/details_poster"
                     android:layout_width="180dp"
                     android:layout_height="270dp"
-                    android:contentDescription="@string/movie_poster"
-                    app:posterUrl="@{movieDetails.posterPath}"
+                    app:setDetailsImage="@{viewModel.movie}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/drstrange_example" />
+                    tools:src="@drawable/drstrange_example"
+                    tools:ignore="ContentDescription" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -53,7 +49,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:text="@{movieDetails.title}"
+                app:setMovieTitle="@{viewModel.movie}"
                 android:textAppearance="@style/Widget.MovieDetails.Title.Textview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/materialCardView"
@@ -61,27 +57,12 @@
                 tools:text="Doctor Strange in the Multiverse of Madness" />
 
             <TextView
-                android:id="@+id/details_tagline"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="8dp"
-                android:text="@{movieDetails.tagline}"
-                android:textAppearance="@style/Widget.MovieDetails.Tagline.Textview"
-                app:layout_constraintEnd_toEndOf="@+id/details_title"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/details_title"
-                app:layout_constraintTop_toBottomOf="@+id/details_user_score"
-                tools:text="Enter a new dimension of Strange." />
-
-            <TextView
                 android:id="@+id/details_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textAppearance="@style/Widget.MovieDetails.Genres.Textview"
-                app:genreSubtitle="@{movieDetails.genres}"
+                app:setGenreSubtitle="@{viewModel.movie}"
                 app:layout_constraintEnd_toEndOf="@+id/details_title"
                 app:layout_constraintStart_toStartOf="@+id/details_title"
                 app:layout_constraintTop_toBottomOf="@+id/details_title"
@@ -95,7 +76,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:textAppearance="@style/Widget.MovieDetails.ExtraData.Textview"
-                app:formatUserScore="@{movieDetails.voteAverage}"
+                app:setUserScore="@{viewModel.movie}"
                 app:layout_constraintStart_toStartOf="@+id/details_title"
                 app:layout_constraintTop_toBottomOf="@+id/details_year"
                 tools:text="User score:\n 7.6/10" />
@@ -110,7 +91,6 @@
                 app:layout_constraintStart_toEndOf="@+id/details_user_score"
                 app:layout_constraintTop_toTopOf="@id/details_user_score" />
 
-
             <TextView
                 android:id="@+id/details_mixed_data"
                 style="@style/Widget.MovieDetails.ExtraData.Textview"
@@ -120,8 +100,24 @@
                 android:textAppearance="@style/Widget.MovieDetails.ExtraData.Textview"
                 app:layout_constraintEnd_toEndOf="@+id/details_title"
                 app:layout_constraintTop_toTopOf="@+id/details_user_score"
-                app:mixedData="@{movieDetails}"
+                app:setMixedData="@{viewModel.movie}"
                 tools:text="15-06-2022 \n EN" />
+
+            <TextView
+                android:id="@+id/details_tagline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="8dp"
+                app:setTagline="@{viewModel.movie}"
+                android:textAppearance="@style/Widget.MovieDetails.Tagline.Textview"
+                app:layout_constraintEnd_toEndOf="@+id/details_title"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/details_title"
+                app:layout_constraintTop_toBottomOf="@+id/details_user_score"
+                tools:text="Enter a new dimension of Strange." />
+
 
             <TextView
                 android:id="@+id/details_overview_title"
@@ -140,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{movieDetails.description}"
+                app:setOverview="@{viewModel.movie}"
                 android:textAppearance="@style/Widget.MovieDetails.OverviewParagraph.Textview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/details_overview_title"
