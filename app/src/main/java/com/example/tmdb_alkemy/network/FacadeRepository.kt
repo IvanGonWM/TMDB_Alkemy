@@ -8,34 +8,30 @@ object FacadeRepository {
     private val loadedMovieList: MutableList<MovieListItem> = mutableListOf()
     private val openedMovieList: MutableList<MovieDetails> = mutableListOf()
 
-    private var currentPage: Int = 1
-    private var totalPages: Int = 1
-    private var totalMovies: Int = 0
     private var loading: Boolean = false
+    var currentPage: Int = 1
+    var totalPages: Int = 1
+    private var totalMovies: Int = 0
 
     suspend fun getNextPage() {
-        if ((currentPage > totalPages) || loading)
-            return
+
+        if ((currentPage > totalPages) || loading) return
+
         loading = true
         try {
             val listResult = MoviesDatabaseApi.retrofitService.getPagedMovieList(currentPage)
-            currentPage++
-            loadedMovieList.addAll(listResult.results)
             totalPages = listResult.totalPages
             totalMovies = listResult.totalResults
+            loadedMovieList.addAll(listResult.results)
+            currentPage++
             loading = false
         } catch (e: Exception) {
             loading = false
+            throw e
         }
     }
 
-    fun getLoadedMoviesList(): List<MovieListItem> {
-        return loadedMovieList
-    }
-
-    fun isLastPage(): Boolean {
-        return currentPage == totalPages
-    }
+    fun getLoadedMoviesList(): List<MovieListItem> = loadedMovieList
 
     suspend fun getOpenedMovieDetails(id: Int): MovieDetails {
         val alreadyExists = openedMovieList.firstOrNull { movie -> movie.id == id }
@@ -49,9 +45,9 @@ object FacadeRepository {
     suspend fun refreshMovies() {
         loadedMovieList.clear()
         openedMovieList.clear()
-        currentPage = 1
-        totalPages = 1
         totalMovies = 0
+        totalPages = 1
+        currentPage = 1
         getNextPage()
     }
 }

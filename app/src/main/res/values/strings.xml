@@ -6,4 +6,7 @@
     <string name="mixed_data">%1$s \n %2$s</string>
     <string name="user_score">User score:\n %1$d/10</string>
     <string name="formatted_date">%1$s %2$s, %3$s</string>
+    <string name="status_text_error">Oops, something went wrong. \n Swipe down to retry</string>
+    <string name="status_text_loading">Hang on, it´s loading</string>
+    <string name="details_status_text_loading">Loading movie details</string>
 </resources>

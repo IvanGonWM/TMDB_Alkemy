@@ -1,5 +1,6 @@
 package com.example.tmdb_alkemy
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.view.View
 import android.widget.ImageView
@@ -17,8 +18,10 @@ import com.example.tmdb_alkemy.model.MovieDetails
 import com.example.tmdb_alkemy.model.MovieListItem
 import com.example.tmdb_alkemy.ui.main_list.MainListAdapter
 import com.example.tmdb_alkemy.ui.main_list.TmdbApiStatus
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import kotlin.math.round
 
 private const val LIST_ITEM_POSTER_URL = "https://www.themoviedb.org/t/p/w220_and_h330_face"
 private const val DETAILS_POSTER_URL = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2"
@@ -37,6 +40,7 @@ fun bindImage(
     }
 }
 
+
 @BindingAdapter("listData")
 fun bindRecyclerView(
     recyclerView: RecyclerView,
@@ -46,7 +50,8 @@ fun bindRecyclerView(
     adapter.submitList(data)
 }
 
-@BindingAdapter("tmdbApiStatus")
+
+@BindingAdapter("statusImage")
 fun bindStatus(
     statusImageView: ImageView,
     status: TmdbApiStatus?
@@ -69,45 +74,86 @@ fun bindStatus(
     }
 }
 
+
+@BindingAdapter("statusText")
+fun bindStatus(
+    statusTextView: TextView,
+    status: TmdbApiStatus?
+) {
+    when (status) {
+        TmdbApiStatus.DONE -> {
+            statusTextView.visibility = View.GONE
+        }
+        TmdbApiStatus.ERROR -> {
+            statusTextView.visibility = View.VISIBLE
+            statusTextView.setText(R.string.status_text_error)
+        }
+        TmdbApiStatus.LOADING -> {
+            statusTextView.visibility = View.VISIBLE
+            statusTextView.setText(R.string.status_text_loading)
+        }
+        else -> {
+            return
+        }
+    }
+}
+
+
+@BindingAdapter("detailStatusText")
+fun bindDetailStatus(
+    statusTextView: TextView,
+    status: TmdbApiStatus?
+) {
+    when (status) {
+        TmdbApiStatus.DONE -> {
+            statusTextView.visibility = View.GONE
+        }
+        TmdbApiStatus.ERROR -> {
+            statusTextView.visibility = View.VISIBLE
+            statusTextView.setText(R.string.status_text_error)
+        }
+        TmdbApiStatus.LOADING -> {
+            statusTextView.visibility = View.VISIBLE
+            statusTextView.setText(R.string.details_status_text_loading)
+        }
+        else -> {
+            return
+        }
+    }
+}
+
+
+@SuppressLint("SetTextI18n")
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("formatMovieDate")
 fun bindMovieDate(
     dateTextView: TextView,
     unformattedDate: String?
 ) {
-    dateTextView.text = ""
-    /*
+
     val format = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     val date = LocalDate.parse(unformattedDate, format)
 
-    Log.d("day", date.dayOfMonth.toString() )
-    Log.d("month", date.month.toString().lowercase().replaceFirstChar { it.uppercaseChar() } )
-    Log.d("year", date.year.toString() )
-    dateTextView.text = "ola"
-    /*Resources.getSystem()
-    .getString(R.string.formatted_date,
-        date.month.toString().lowercase().replaceFirstChar { it.uppercaseChar() },
-        date.dayOfMonth.toString(),
-        date.year.toString())*/*/
-}
+    val formattedDay = date.dayOfMonth.toString()
+    val formattedMonth  = date.month.toString().lowercase().replaceFirstChar { it.uppercaseChar() }
+    val formattedYear = date.year.toString()
 
-/**dastards**/
+    dateTextView.text = "$formattedMonth $formattedDay, $formattedYear"
+}
 
 
 @BindingAdapter("setDetailsImage")
 fun bindDetailsImage(
     imageView: ImageView,
-    movie: LiveData<MovieDetails>?
+    posterPath: String?
 ) {
-    if (movie?.value?.posterPath != null) {
-        movie.value!!.posterPath.let {
-            val imageUri =
-                (DETAILS_POSTER_URL + movie.value!!.posterPath).toUri().buildUpon().scheme("https")
-                    .build()
-            imageView.load(imageUri) {
-                placeholder(R.drawable.loading_animation)
-                error(R.drawable.ic_broken_image)
-            }
+    posterPath?.let {
+        val imageUri =
+            (DETAILS_POSTER_URL + posterPath).toUri().buildUpon().scheme("https")
+                .build()
+        imageView.load(imageUri) {
+            placeholder(R.drawable.loading_animation)
+            error(R.drawable.ic_broken_image)
         }
     }
 }
@@ -116,37 +162,37 @@ fun bindDetailsImage(
 @BindingAdapter("setMovieTitle")
 fun bindTitle(
     textView: TextView,
-    movie: LiveData<MovieDetails>?
+    title: String?
 ) {
-    if (movie?.value?.title != null)
-        textView.text = movie.value!!.title
+    if (title != null)
+        textView.text = title
 }
 
 
 @BindingAdapter("setGenreSubtitle")
 fun bindGenreSubtitle(
     genreTextView: TextView,
-    movie: LiveData<MovieDetails>?
+    genres: List<Genre>?
 ) {
-    if (movie?.value?.voteAverage != null) {
-        genreTextView.text = movie.value!!.genres.joinToString { it.name }
+    if (genres != null) {
+        genreTextView.text = genres.joinToString { it.name }
     }
 }
 
 
+@SuppressLint("SetTextI18n")
 @BindingAdapter("setUserScore")
 fun bindUserScore(
     scoreTextView: TextView,
-    movie: LiveData<MovieDetails>?
+    voteAverage: Double?
 ) {
-    if (movie?.value?.voteAverage != null) {
-        scoreTextView.text = "User score:\n ${movie.value!!.voteAverage}/10"
-            //Resources.getSystem()
-            //.getString(R.string.user_score, movie.value!!.voteAverage)
+    if (voteAverage != null) {
+        scoreTextView.text = "User score:\n ${round(voteAverage)} / 10"
     }
 }
 
 
+@SuppressLint("SetTextI18n")
 @BindingAdapter("setMixedData")
 fun bindMixedData(
     mixedDataTextView: TextView,
@@ -155,33 +201,25 @@ fun bindMixedData(
     if (movie?.value?.releaseDate != null
         && movie.value?.originalLanguage != null
     ) {
-        mixedDataTextView.text = "${movie.value!!.releaseDate} \n ${movie.value!!.originalLanguage}"
-
-            /*Resources.getSystem()
-            .getString(
-                R.string.mixed_data,
-                movie.value!!.releaseDate,
-                movie.value!!.originalLanguage
-            )*/
+        mixedDataTextView.text = "${movie.value!!.releaseDate} \n Lang: ${movie.value!!.originalLanguage}"
     }
 }
 
 @BindingAdapter("setTagline")
 fun bindTagline(
     taglineTextView: TextView,
-    movie: LiveData<MovieDetails>?
+    tagline: String?
 ) {
-    if (movie?.value?.tagline != null) {
-        taglineTextView.text = movie.value!!.tagline
-    }
+    if (tagline != null) taglineTextView.text = tagline
+
 }
 
 @BindingAdapter("setOverview")
 fun bindOverview(
     overviewTextView: TextView,
-    movie: LiveData<MovieDetails>?
+    overview: String?
 ) {
-    if (movie?.value?.description != null) {
-        overviewTextView.text = movie.value!!.description
+    if (overview != null) {
+        overviewTextView.text = overview
     }
 }

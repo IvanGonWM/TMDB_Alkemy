@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainListFragment"
         android:name="com.example.tmdb_alkemy.ui.main_list.MainListFragment"
-        android:label="Main List"
+        android:label="Popular Movies"
         tools:layout="@layout/fragment_main_list">
         <action
             android:id="@+id/action_mainListFragment_to_movieDetailsFragment"

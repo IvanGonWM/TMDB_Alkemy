@@ -11,7 +11,7 @@
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_layout"
+        android:id="@+id/details_swipe_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -34,11 +34,11 @@
                     android:id="@+id/details_poster"
                     android:layout_width="180dp"
                     android:layout_height="270dp"
-                    app:setDetailsImage="@{viewModel.movie}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/drstrange_example"
-                    tools:ignore="ContentDescription" />
+                    app:setDetailsImage="@{viewModel.movie.posterPath}"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/drstrange_example" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -49,23 +49,24 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                app:setMovieTitle="@{viewModel.movie}"
                 android:textAppearance="@style/Widget.MovieDetails.Title.Textview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/materialCardView"
                 app:layout_constraintTop_toTopOf="parent"
+                app:setMovieTitle="@{viewModel.movie.title}"
                 tools:text="Doctor Strange in the Multiverse of Madness" />
 
             <TextView
                 android:id="@+id/details_year"
-                android:layout_width="wrap_content"
+                style="@style/Widget.MovieDetails.Genres.Textview"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textAppearance="@style/Widget.MovieDetails.Genres.Textview"
-                app:setGenreSubtitle="@{viewModel.movie}"
                 app:layout_constraintEnd_toEndOf="@+id/details_title"
                 app:layout_constraintStart_toStartOf="@+id/details_title"
                 app:layout_constraintTop_toBottomOf="@+id/details_title"
+                app:setGenreSubtitle="@{viewModel.movie.genres}"
                 tools:text="Fantasy, Action, Adventure" />
 
             <TextView
@@ -74,11 +75,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:textAppearance="@style/Widget.MovieDetails.ExtraData.Textview"
-                app:setUserScore="@{viewModel.movie}"
                 app:layout_constraintStart_toStartOf="@+id/details_title"
                 app:layout_constraintTop_toBottomOf="@+id/details_year"
+                app:setUserScore="@{viewModel.movie.voteAverage}"
                 tools:text="User score:\n 7.6/10" />
 
             <View
@@ -108,14 +109,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                app:setTagline="@{viewModel.movie}"
+                android:layout_marginBottom="16dp"
                 android:textAppearance="@style/Widget.MovieDetails.Tagline.Textview"
+                app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
                 app:layout_constraintEnd_toEndOf="@+id/details_title"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/details_title"
                 app:layout_constraintTop_toBottomOf="@+id/details_user_score"
+                app:layout_constraintVertical_bias="0.8"
+                app:setTagline="@{viewModel.movie.tagline}"
                 tools:text="Enter a new dimension of Strange." />
 
 
@@ -136,12 +140,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                app:setOverview="@{viewModel.movie}"
                 android:textAppearance="@style/Widget.MovieDetails.OverviewParagraph.Textview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/details_overview_title"
                 app:layout_constraintTop_toBottomOf="@+id/details_overview_title"
+                app:setOverview="@{viewModel.movie.description}"
                 tools:text="Doctor Strange, with the help of mystical allies both old and new, traverses the mind-bending and dangerous alternate realities of the Multiverse to confront a mysterious new adversary." />
+
+            <ImageView
+                android:id="@+id/status_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/status_image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:statusImage="@{viewModel.status}" />
+
+            <TextView
+                android:id="@+id/details_status_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:detailStatusText="@{viewModel.status}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/status_image" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

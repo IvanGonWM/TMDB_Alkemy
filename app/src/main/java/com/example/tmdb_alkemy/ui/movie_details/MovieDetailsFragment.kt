@@ -40,7 +40,7 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val swipeLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipe_layout)
+        val swipeLayout = view.findViewById<SwipeRefreshLayout>(R.id.details_swipe_layout)
         swipeLayout.setOnRefreshListener {
             val navController = findNavController()
             navController.run {
@@ -50,7 +50,6 @@ class MovieDetailsFragment : Fragment() {
                         .actionMainListFragmentToMovieDetailsFragment(movieId = id.toInt())
                 )
             }
-
             swipeLayout.isRefreshing = false
         }
     }
