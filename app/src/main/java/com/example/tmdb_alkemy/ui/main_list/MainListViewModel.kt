@@ -53,7 +53,7 @@ class MainListViewModel : ViewModel()  {
                 _movieList.value = FacadeRepository.getLoadedMoviesList()
                 onLastPage = (FacadeRepository.currentPage == FacadeRepository.totalPages)
             }
-            catch (e: Exception)
+            catch (_: Exception)
             {
             }
         }
