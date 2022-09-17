@@ -9,4 +9,5 @@
     <string name="status_text_error">Oops, something went wrong. \n Swipe down to retry</string>
     <string name="status_text_loading">Hang on, it´s loading</string>
     <string name="details_status_text_loading">Loading movie details</string>
+    <string name="search">search</string>
 </resources>

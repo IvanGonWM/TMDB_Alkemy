@@ -60,6 +60,10 @@ class MainListViewModel : ViewModel()  {
         return true
     }
 
+    fun getFiltered(search: String?) {
+        isSearching = !search.isNullOrEmpty()
+        _movieList.value = FacadeRepository.getLoadedMoviesList().filter { it.title.lowercase().contains(search!!.lowercase()) }
+    }
 
     fun refreshMovies() {
         viewModelScope.launch(coroutineExceptionHandler) {

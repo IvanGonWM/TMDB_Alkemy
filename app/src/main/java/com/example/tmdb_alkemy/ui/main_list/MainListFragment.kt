@@ -2,9 +2,8 @@ package com.example.tmdb_alkemy.ui.main_list
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -70,8 +69,30 @@ class MainListFragment : Fragment() {
                 swipeLayout?.isRefreshing = false
             }
         }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu, menu)
+
+        val search = menu.findItem(R.id.app_bar_search)
+
+        search.isVisible = true
+        val searchView = search?.actionView as SearchView
+        searchView.queryHint = "Search by titles!"
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.getFiltered(newText)
+                return true
+            }
 
 
+        })
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }
 
