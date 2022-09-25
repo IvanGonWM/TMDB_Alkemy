@@ -1,15 +1,12 @@
 package com.example.tmdb_alkemy.ui.movie_details
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.tmdb_alkemy.model.MovieDetails
 import com.example.tmdb_alkemy.network.FacadeRepository
 import com.example.tmdb_alkemy.ui.main_list.TmdbApiStatus
 import kotlinx.coroutines.launch
 
-class MovieDetailsViewModel(private val id: Int) : ViewModel() {
+class MovieDetailsViewModel(val id: Int) : ViewModel() {
 
     private val _status = MutableLiveData<TmdbApiStatus>()
     val status: LiveData<TmdbApiStatus> = _status
@@ -34,5 +31,12 @@ class MovieDetailsViewModel(private val id: Int) : ViewModel() {
             }
 
         }
+    }
+}
+
+@Suppress("UNCHECKED_CAST")
+class MovieDetailsViewModelFactory(private val id: Int) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return MovieDetailsViewModel(id) as T
     }
 }

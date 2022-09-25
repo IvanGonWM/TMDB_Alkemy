@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.tmdb_alkemy.R
@@ -14,6 +15,9 @@ import com.example.tmdb_alkemy.ui.main_list.MainListFragmentDirections
 class MovieDetailsFragment : Fragment() {
 
     private lateinit var id: Number
+    private val viewModel: MovieDetailsViewModel by viewModels {
+        MovieDetailsViewModelFactory(id.toInt())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +34,6 @@ class MovieDetailsFragment : Fragment() {
     ): View {
 
         val binding = FragmentMovieDetailsBinding.inflate(inflater)
-        val viewModel = MovieDetailsViewModel(id.toInt())
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
